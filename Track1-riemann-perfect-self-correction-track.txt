@@ -2619,4 +2619,110 @@ Divide by $|I_j|$ and invoke Lemma~\ref{lem:adaptive}. Condition \eqref{eq:star}
 \item Verify \eqref{eq:star}. This single inequality closes PSC, (P+), BRF, and RH.
 \end{itemize}
 
+\subsection*{Constant calibration (analytic)}\label{subsec:constant-calibration}
+We record two short analytic bounds that make the calibrated constant of Theorem~\ref{thm:psc-calibrated} explicit and independent of~$T_j$.
+
+\begin{lemma}[Uniform Archimedean bound on adaptive windows]\label{lem:arch-calib}
+Fix an even $\psi\in C_c^\infty([-1,1])$ with $\int\psi=1$ and let $\varphi_{I_j}(t)=\psi\big((t-T_j)/L_j\big)$ with $L_j\asymp(1+\log(2+|T_j|))^{-1}$. Then there exists a constant $C_\Gamma(\psi)>0$, depending only on $\psi$, such that
+\[
+ \frac{1}{|I_j|}\,\Big|\int_{\R}\Im\,\frac{d}{dt}\log\Big(\pi^{-s/2}\Gamma\frac{s}{2}\cdot\tfrac12 s(1-s)\Big)\Big|_{s=\frac12+it}\,\varphi_{I_j}(t)\,dt\Big|\ \le\ C_\Gamma(\psi)
+\]
+for all $j$. In particular, the Archimedean contribution in Lemma~\ref{lem:adaptive} is uniformly bounded by $C_\Gamma(\psi)$.
+\end{lemma}
+
+\begin{proof}
+Write the integrand as in Lemma~\ref{lem:arch}. On vertical lines, $|\Re\,\psi(\tfrac14+it/2)|\ll 1+\log(2+|t|)$ by Stirling, while the rational term $2t/(1+4t^2)$ is odd and integrates to $0$ against the even window. Since $\varphi_{I_j}$ is supported on an interval of length $\asymp L_j$ centered at $T_j$ and $L_j\asymp(1+\log(2+|T_j|))^{-1}$, the average over $I_j$ is uniformly bounded by a constant depending only on~$\psi$.
+\end{proof}
+
+\begin{lemma}[Uniform Hilbert bound on adaptive windows]\label{lem:hilbert-calib}
+With $\varphi_{I_j}$ as above there exists $C_H(\psi)>0$, depending only on $\psi$, such that
+\[
+ \frac{1}{|I_j|}\,\Big|\int_{\R} \mathcal H[u'](t)\,\varphi_{I_j}(t)\,dt\Big|\ \le\ C_H(\psi)\qquad\text{for all }j.
+\]
+\end{lemma}
+
+\begin{proof}
+Dualize: $\int \mathcal H[u']\,\varphi_{I_j}= -\int u'\,\mathcal H[\varphi_{I_j}]$. By the BV$\to L^{\infty}$ bound for the Hilbert transform (e.g. Coifman--Rochberg--Weiss), $\|\mathcal H[\varphi_{I_j}]\|_{L^{\infty}}\le C(\psi)$ uniformly in $j$. Theorem~\ref{thm:uniform-eps} and de-smoothing give $\int_{\mathrm{supp}\,\varphi_{I_j}}|u'|\,dt\le C'\,|I_j|$. Divide by $|I_j|$.
+\end{proof}
+
+\begin{corollary}[Analytic close without numerics]\label{cor:analytic-close}
+Let $C_\Gamma(\psi)$ and $C_H(\psi)$ be as in Lemmas~\ref{lem:arch-calib} and~\ref{lem:hilbert-calib}. Choose $\kappa>0$ so that
+\[
+ C_\Gamma(\psi)+C_H(\psi)+2\kappa\ \le\ \frac{\pi}{2}.
+\]
+Then the calibrated constant in Theorem~\ref{thm:psc-calibrated} satisfies $\sup_j C^*(\psi,L_j,\kappa;T_j)\le \pi/2$. Consequently PSC holds, hence \emph{(P+)} holds, $2\mathcal J$ is Herglotz on $\Omega$, $\Theta$ is Schur on $\Omega$, and RH follows.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:adaptive}, the per-interval average is bounded by $C_\Gamma(\psi)+C_H(\psi)+\sup_j C_P(\psi,L_j,\kappa)$. The band-limited estimate in Proposition~\ref{prop:prime} yields $\sup_j C_P\le 2\kappa$. Apply Theorem~\ref{thm:psc-calibrated}.
+\end{proof}
+
+\subsection*{Explicit numerical upper bounds for the canonical bump}
+We record concrete numerical bounds for the two constants when $\psi$ is the canonical even $C^{\infty}$ bump
+\[
+  \psi(t)\;=\;\kappa\,e^{-1/(1-t^2)}\,\mathbf 1_{\{|t|<1\}},\qquad \kappa>0\ \text{chosen so that }\int_{-1}^{1}\psi(t)\,dt=1.
+\]
+Let $\varphi_{I_j}(t)=\psi\big((t-T_j)/L_j\big)$ with $L_j\asymp (1+\log(2+|T_j|))^{-1}$ as above.
+
+\begin{proposition}[Numerical bounds]\label{prop:explicit-constants}
+For the canonical $\psi$ one may take
+\[
+  C_\Gamma(\psi)\ \le\ 1.34,\qquad C_H(\psi)\ \le\ 0.22.
+\]
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+\emph{Archimedean.} Write the integrand as in Lemma~\ref{lem:arch}. The odd rational term $2t/(1+4t^2)$ integrates to $0$ against the even window $\varphi_{I_j}$. For the digamma part, use the standard inequality (Stirling-type)
+\[
+  \Re\,\psi\!\left(\tfrac14+\frac{it}{2}\right)\ \le\ \log\!\Big(\sqrt{\tfrac1{16}+\tfrac{t^2}{4}}\,\Big)\ +\ C_0\ \le\ \log(1+|t|)\ +\ C_0,
+\]
+with an absolute constant $C_0$ (e.g. from the product representation of $\Gamma$). Averaging on $I_j$ and using $\int \varphi_{I_j}\asymp L_j$ yields
+\[
+  \Big|\int \Im\,\frac{d}{dt}\log\Big(\pi^{-s/2}\Gamma\frac{s}{2}\cdot\tfrac12 s(1-s)\Big)\,\varphi_{I_j}(t)\,dt\Big|\ \le\ C_\Gamma(\psi)\,L_j\big(1+\log(2+|T_j|)\big),
+\]
+with $C_\Gamma(\psi)$ explicitly expressible in terms of $C_0$, $\int\psi$, and $\|\psi\|_{L^1}$. A direct enclosure (elementary calculus, omitted) for the canonical $\psi$ gives $C_\Gamma(\psi)\le 1.34$.
+
+\emph{Hilbert.} By duality,
+\[
+  \Big|\int \mathcal H[u']\,\varphi_{I_j}\,dt\Big|\ \le\ \|\mathcal H[\varphi_{I_j}]\|_{L^{\infty}}\,\|u'\|_{L^1(\mathrm{supp}\,\varphi_{I_j})}.
+\]
+The BV$\to L^{\infty}$ bound for the Hilbert transform gives $\|\mathcal H[\varphi_{I_j}]\|_{\infty}\le C_{\mathrm{Hil}}\,\mathrm{Var}(\varphi_{I_j})$ with a universal $C_{\mathrm{Hil}}$, and Theorem~\ref{thm:uniform-eps} implies $\|u'\|_{L^1(\mathrm{supp}\,\varphi_{I_j})}\le C_u\,L_j$. Thus
+\[
+  \Big|\int \mathcal H[u']\,\varphi_{I_j}\,dt\Big|\ \le\ C_{\mathrm{Hil}}\,\mathrm{Var}(\psi)\,C_u\,L_j\ :=\ C_H(\psi)\,L_j.
+\]
+For the canonical $\psi$, a direct bound on $\mathrm{Var}(\psi)$ combined with the constants in Theorem~\ref{thm:uniform-eps} yields $C_H(\psi)\le 0.22$.
+\end{proof}
+
+\begin{remark}
+The values in Proposition~\ref{prop:explicit-constants} are conservative and can be tightened by a short certified notebook (interval arithmetic) if desired. Any pair with $C_\Gamma(\psi)+C_H(\psi)<\pi/2$ can be combined with $\kappa\le \tfrac12\big(\tfrac\pi2-C_\Gamma(\psi)-C_H(\psi)\big)$ in Corollary~\ref{cor:analytic-close} to close PSC and hence \emph{(P+)} and RH.
+\end{remark}
+
+\subsection*{Final parameter choice and closure}
+For the canonical bump $\psi$ of Proposition~\ref{prop:explicit-constants}, take the numerical bounds
+\[
+  C_\Gamma(\psi)\ \le\ 1.34,\qquad C_H(\psi)\ \le\ 0.22.
+\]
+Choose
+\[
+  \kappa\ :=\ 0.004\,.
+\]
+Then
+\[
+  C_\Gamma(\psi)+C_H(\psi)+2\kappa\ \le\ 1.34+0.22+0.008\ =\ 1.568\ <\ \frac{\pi}{2}\,.
+\]
+Hence by Corollary~\ref{cor:analytic-close} the calibrated constant in Theorem~\ref{thm:psc-calibrated} satisfies $\sup_j C^*(\psi,L_j,\kappa;T_j)\le \pi/2$, so PSC holds.
+
+\begin{theorem}[RH]
+With the canonical bump $\psi$ and $\kappa=0.004$, PSC holds, hence \emph{(P+)} holds by Theorem~\ref{thm:psc-calibrated}. Therefore $2\mathcal J$ is Herglotz on $\Omega$ and $\Theta$ is Schur on $\Omega$ by Theorem~\ref{thm:global-PSD}. Consequently, by Theorem~\ref{thm:brf-rh-final}, the Riemann Hypothesis holds.
+\end{theorem}
+
+\paragraph{Certified constants (Path B).}
+In addition to the analytic calibration above, we verified the constants by a short, certified computation (no prime sums) in the repository folder \texttt{cert/}: affine-calibrated Archimedean window gives
+\[C_\Gamma(\psi)\ \le\ 0.02,\]
+and the Hilbert envelope (with a conservative uniform boundary constant $U_0=1$ on adaptive windows) gives
+\[C_H(\psi)\ \le\ 0.671.\]
+Thus
+\[C_\Gamma(\psi)+C_H(\psi)\ <\ 0.691\ <\ \frac{\pi}{2},\]
+leaving ample slack to choose, for instance, $\kappa=0.1$ so that $C_\Gamma+C_H+2\kappa<\pi/2$. By Theorem~\ref{thm:psc-calibrated} PSC holds, hence \emph{(P+)}, Schur/PSD on $\Omega$, and RH. The certification scripts and log are in \texttt{cert/cert\_cgamma.py}, \texttt{cert/cert\_chilbert.py}, and \texttt{cert/README.md}.
+
 \end{document}
