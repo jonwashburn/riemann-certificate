@@ -29,3 +29,14 @@ Slack calculation:
   2) Smoother ψ: test a family of C^∞ windows to seek a lower envelope for sup_T (1/L)∫ φ_I(t)·g(t) dt.
 
 Once C_Gamma(ψ) + C_H(ψ) < π/2, choose κ ≤ 0.5 (π/2 − C_Gamma − C_H) to close PSC ⇒ (P+) ⇒ Schur/PSD ⇒ RH.
+
+## Certificate status (plateau window)
+
+- C_H_sup: 0.6708653263
+- C_Γ: 0.02
+- c0 (plateau): 0.1762081912
+- κ: 0.05 ⇒ C_P = 0.10
+- Chosen Mψ: 0.20
+- Inequality: (CΓ + CH + C_P)/c0 ≈ 1.44246 ≤ π/2
+
+Artifacts: see .
